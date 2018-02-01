@@ -18,6 +18,7 @@
             %th= :commits.t
             %th= :gerrit.t
             %th= :rietveld.t
+            %th= :ongoing_review.t
             %th= :first_commit.t
             %th= :last_commit.t
             %th
@@ -27,8 +28,9 @@
               %th= i+1
               %th= "#{author.name} &lt;#{author.email}&gt;"
               %td= "<a href=https://chromium.googlesource.com/chromium/src/+log/master?author=#{author.email}>#{author.commits.size}</a>"
-              %td= "<a href=https://chromium-review.googlesource.com/q/status:merged+author:#{author.email}>Link</a>"
-              %td= "<a href=https://codereview.chromium.org/search?closed=2&owner=#{author.email}>Link</a>"
+              %td= "<a href=https://chromium-review.googlesource.com/q/status:merged+author:#{author.email}>Go gerrit</a>"
+              %td= "<a href=https://codereview.chromium.org/search?closed=2&owner=#{author.email}>Go rietveld</a>"
+              %td= "<a href=https://chromium-review.googlesource.com/q/is:open+owner:#{author.email}>Go ongoing</a>"
               %td= I18n.localize(author.commits.first.try(:date), format: :long) rescue ""
               %td= I18n.localize(author.commits.last.try(:date), format: :long) rescue ""
               %td
