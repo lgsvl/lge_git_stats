@@ -4,12 +4,6 @@
       %a{href: 'best_authors.html'}= :best_authors.t
     %li{class: page == :commits_sum_by_author_by_date ? "active" : ""}
       %a{href: 'commits_sum_by_author_by_date.html'}= :commits_sum_by_author_by_date.t
-    %li{class: page == :changed_lines_by_author_by_date ? "active" : ""}
-      %a{href: 'changed_lines_by_author_by_date.html'}= :changed_lines_by_author_by_date.t
-    %li{class: page == :insertions_by_author_by_date ? "active" : ""}
-      %a{href: 'insertions_by_author_by_date.html'}= :insertions_by_author_by_date.t
-    %li{class: page == :deletions_by_author_by_date ? "active" : ""}
-      %a{href: 'deletions_by_author_by_date.html'}= :deletions_by_author_by_date.t
 
   .tab-content
     .tab-pane.active
@@ -22,8 +16,8 @@
             %th #
             %th= :author.t
             %th= :commits.t
-            %th= :insertions.t
-            %th= :deletions.t
+            %th= :gerrit.t
+            %th= :rietveld.t
             %th= :first_commit.t
             %th= :last_commit.t
             %th
@@ -32,9 +26,9 @@
             %tr
               %th= i+1
               %th= "#{author.name} &lt;#{author.email}&gt;"
-              %td= author.commits.size
-              %td= author.insertions
-              %td= author.deletions
+              %td= "<a href=https://chromium.googlesource.com/chromium/src/+log/master?author=#{author.email}>#{author.commits.size}</a>"
+              %td= "<a href=https://chromium-review.googlesource.com/q/status:merged+author:#{author.email}>Link</a>"
+              %td= "<a href=https://codereview.chromium.org/search?closed=2&owner=#{author.email}>Link</a>"
               %td= I18n.localize(author.commits.first.try(:date), format: :long) rescue ""
               %td= I18n.localize(author.commits.last.try(:date), format: :long) rescue ""
               %td
@@ -54,15 +48,5 @@
 
       -elsif page == :changed_lines_by_author_by_date
         = high_stock("charts.changed_lines_by_author_by_date", charts.changed_lines_by_author_by_date)
-        %small
-          %center= "5 #{:best_authors_shown.t}"
-
-      -elsif page == :insertions_by_author_by_date
-        = high_stock("charts.insertions_by_author_by_date", charts.insertions_by_author_by_date)
-        %small
-          %center= "5 #{:best_authors_shown.t}"
-
-      -elsif page == :deletions_by_author_by_date
-        = high_stock("charts.deletions_by_author_by_date", charts.deletions_by_author_by_date)
         %small
           %center= "5 #{:best_authors_shown.t}"

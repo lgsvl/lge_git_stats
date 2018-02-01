@@ -54,9 +54,6 @@ module GitStats
             general: 'general.html',
             activity: 'activity/by_date.html',
             authors: 'authors/best_authors.html',
-            files: 'files/by_date.html',
-            lines: 'lines/by_date.html',
-            comments: 'comments/by_date.html'
         }
       end
 
